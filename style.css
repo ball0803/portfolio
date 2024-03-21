@@ -1,0 +1,95 @@
+body {
+    background-color : #f8f5f0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Livvic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+canvas{
+    margin: 0;
+    padding: 0;
+    position:fixed;
+    top:0;
+    left:0;
+}
+h1{
+  font-family: "Lily Script One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.first-name{
+    font-size: 20rem;
+    letter-spacing: -1rem;
+    transform: translate(-30%, -30%);
+}
+
+.last-name{
+    font-size: 10rem;
+    letter-spacing: -0.5rem;
+    transform: translate(50%, 30%);
+}
+
+.front-text{
+    color: #FFFFFF;
+    mix-blend-mode: exclusion;
+}
+
+
+.back-text{
+    color: #FFFFFF;
+    /* color: #000000; */
+    mix-blend-mode: normal;
+}
+
+.hero{
+    position: absolute;
+}
+
+#webglCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: exclusion;
+}
+
+.subtitle{
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.2rem;
+}
+
+.cardCover{
+    color:white;
+    /* background-color: #F9C920; */
+    background-image: radial-gradient(circle at 50.2% 50.10%, #e69c2e, #F9C920);
+    /* background-image: linear-gradient(90deg, #e69c2e, #F9C920); */
+    border-radius: 2rem;
+    padding: 20px;
+    width: 600px;
+    height: 600px;
+    margin: 10px auto;
+	transform-style: preserve-3d;
+}
+
+.container {
+    position: absolute;
+    background-color: #FEF5E9;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 5%;
+
+}
