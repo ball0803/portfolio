@@ -2,8 +2,11 @@ import '../style.css';
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import { initScene } from './scene';
-import { initGUIController } from './controller';
-import { initHelper } from './helper';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 const render = new THREE.WebGLRenderer({
   canvas: document.querySelector('#threeJsCanvas'),
@@ -49,77 +52,76 @@ glftLoader.load(camelURL.href,
 
   const fShader = /* glsl */`
     varying vec2 v_uv;
-    uniform vec2 u_mouse;
-    uniform vec2 u_resolution;
+
     uniform vec3 u_color;
     uniform float u_time;
     mat2 mtx = mat2( 0.80,  0.80, -0.80,  0.80 );
 
-float colormap_f1(float x) {
-    return (0.3647 * x + 164.02) * x + 154.21;
-}
-
-float colormap_f2(float x) {
-    return (126.68 * x + 114.35) * x + 0.1551;
-}
-
-float colormap_red(float x) {
-    if (x < 0.0) {
-        return 0.0;
-    } else if (x < 0.136721748106749) {
-        return colormap_f2(x) / 255.0;
-    } else if (x < 0.23422409711017) {
-        return (1789.6 * x - 226.52) / 255.0;
-    } else if (x < 0.498842730309711) {
-        return colormap_f1(x) / 255.0;
-    } else if (x < 0.549121259378134) {
-        return (-654.951781800243 * x + 562.838873112072) / 255.0;
-    } else if (x < 1.0) {
-        return ((3.6897 * x + 11.125) * x + 223.15) / 255.0;
-    } else {
-        return 237.0 / 255.0;
+    float colormap_f1(float x) {
+        return (0.3647 * x + 164.02) * x + 154.21;
     }
-}
 
-float colormap_green(float x) {
-    if (x < 0.0) {
-        return 154.0 / 255.0;
-    } else if (x < 3.888853260731947e-2) {
-        return colormap_f1(x) / 255.0;
-    } else if (x < 0.136721748106749e0) {
-        return (-1455.86353067466 * x + 217.205447330541) / 255.0;
-    } else if (x < 0.330799131955394) {
-        return colormap_f2(x) / 255.0;
-    } else if (x < 0.498842730309711) {
-        return (1096.6 * x - 310.91) / 255.0;
-    } else if (x < 0.549121259378134) {
-        return colormap_f1(x) / 255.0;
-    } else {
-        return 244.0 / 255.0;
+    float colormap_f2(float x) {
+        return (126.68 * x + 114.35) * x + 0.1551;
     }
-}
 
-float colormap_blue(float x) {
-    if (x < 0.0) {
-        return 93.0 / 255.0;
-    } else if (x < 3.888853260731947e-2) {
-        return (1734.6 * x + 93.133) / 255.0;
-    } else if (x < 0.234224097110170) {
-        return colormap_f1(x) / 255.0;
-    } else if (x < 0.330799131955394) {
-        return (-1457.96598791534 * x + 534.138211325166) / 255.0;
-    } else if (x < 0.549121259378134) {
-        return colormap_f2(x) / 255.0;
-    } else if (x < 1.0) {
-        return ((3.8931 * x + 176.32) * x + 3.1505) / 255.0;
-    } else {
-        return 183.0 / 255.0;
+    float colormap_red(float x) {
+        if (x < 0.0) {
+            return 0.0;
+        } else if (x < 0.136721748106749) {
+            return colormap_f2(x) / 255.0;
+        } else if (x < 0.23422409711017) {
+            return (1789.6 * x - 226.52) / 255.0;
+        } else if (x < 0.498842730309711) {
+            return colormap_f1(x) / 255.0;
+        } else if (x < 0.549121259378134) {
+            return (-654.951781800243 * x + 562.838873112072) / 255.0;
+        } else if (x < 1.0) {
+            return ((3.6897 * x + 11.125) * x + 223.15) / 255.0;
+        } else {
+            return 237.0 / 255.0;
+        }
     }
-}
 
-vec4 colormap(float x) {
-    return vec4(colormap_red(x), colormap_green(x), colormap_blue(x), 1.0);
-}
+    float colormap_green(float x) {
+        if (x < 0.0) {
+            return 154.0 / 255.0;
+        } else if (x < 3.888853260731947e-2) {
+            return colormap_f1(x) / 255.0;
+        } else if (x < 0.136721748106749e0) {
+            return (-1455.86353067466 * x + 217.205447330541) / 255.0;
+        } else if (x < 0.330799131955394) {
+            return colormap_f2(x) / 255.0;
+        } else if (x < 0.498842730309711) {
+            return (1096.6 * x - 310.91) / 255.0;
+        } else if (x < 0.549121259378134) {
+            return colormap_f1(x) / 255.0;
+        } else {
+            return 244.0 / 255.0;
+        }
+    }
+
+    float colormap_blue(float x) {
+        if (x < 0.0) {
+            return 93.0 / 255.0;
+        } else if (x < 3.888853260731947e-2) {
+            return (1734.6 * x + 93.133) / 255.0;
+        } else if (x < 0.234224097110170) {
+            return colormap_f1(x) / 255.0;
+        } else if (x < 0.330799131955394) {
+            return (-1457.96598791534 * x + 534.138211325166) / 255.0;
+        } else if (x < 0.549121259378134) {
+            return colormap_f2(x) / 255.0;
+        } else if (x < 1.0) {
+            return ((3.8931 * x + 176.32) * x + 3.1505) / 255.0;
+        } else {
+            return 183.0 / 255.0;
+        }
+    }
+
+    vec4 colormap(float x) {
+        return vec4(colormap_red(x), colormap_green(x), colormap_blue(x), 1.0);
+    } 
     
 
     float rand(vec2 n) { 
@@ -171,7 +173,7 @@ vec4 colormap(float x) {
   });
 
   loadedModel.scene.children[0].material = new THREE.MeshToonMaterial({color: 0xf6b604, gradientMap: texture});
-  loadedModel.scene.position.set(0, 4.5, 0);
+  loadedModel.scene.position.set(0, 0, 0);
   loadedModel.scene.scale.set(3, 3, 3);
   // initGUIController(loadedModel.scene.children[0], camera, directionalLight, ambientLight, fog);
 
@@ -231,9 +233,9 @@ function animate(time) {
   render.setAnimationLoop(animate);
 }
 
-function cardHovereffect(){
-	let card = document.querySelector('.cardCover');
-	window.addEventListener('mousemove', function(e){
+
+
+function cardHovereffect(e){
 		let cardWidth = card.clientWidth || card.offsetWidth || card.scrollWidth;
 		let cardHeight = card.clientHeight || card.offsetHeight || card.scrollHeight;
 		let wMultiple = 320/cardWidth;
@@ -248,23 +250,45 @@ function cardHovereffect(){
 		let imgCSS = `rotateX(${xRotate}deg) rotateY(${yRotate}deg) translateY(${.6*xRotate}px) translateX(${1.2*yRotate}px)`;
 
 		card.style.transform = imgCSS;
+	}
 
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
+let card = document.querySelector('.cardCover');
+window.addEventListener('mousemove', cardHovereffect);
 
-        card.style.backgroundImage = `radial-gradient(circle at ${x*100}% ${y*100}%, #e69c2e 20%, #F9C920 80%)`;
-
-        // let centerX = window.innerWidth / 2;
-        // let centerY = window.innerHeight / 2;
-        // let angleRadians = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-        // let angleDegrees = angleRadians * (180 / Math.PI);
-
-        // angleDegrees -= 90
-
-        // card.style.backgroundImage = `linear-gradient(${angleDegrees}deg, #F9C920, #e69c2e)`;
-	});
-}
-
-cardHovereffect();
-
+// cardHovereffect();
 animate();
+const cardCover = document.querySelector(".cardCover");
+
+gsap.to(".cardCover", {
+    scrollTrigger: {
+        trigger: ".cardCover",
+        // toggleActions: "restart none reverse none",
+        scrub: true,
+        start: "top",
+        end: "bottom ",
+        markers: true,
+        // onUpdate: self => console.log("progress", self.progress)
+        onEnter: () => {
+          card.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0px) translateX(0px)";
+          window.removeEventListener('mousemove', cardHovereffect);
+        },
+        onLeaveBack: () => {
+            window.addEventListener('mousemove', cardHovereffect);
+        },
+    },
+    // x: 0,
+    width: "100vw",
+    height: "100vh",
+    borderRadius: "0%"
+})
+
+gsap.to("[data-speed]", {
+  y: (i, el) => (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window) ,
+  ease: "none",
+  scrollTrigger: {
+    start: 0,
+    end: "max",
+    invalidateOnRefresh: true,
+    scrub: 0
+  }
+});

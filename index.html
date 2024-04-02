@@ -20,15 +20,29 @@
 	<body>
 		<div id="app">
 			<div class="container">
-				<h1 class="hero back-text first-name">Phurin</h1>
-				<h1 class="hero back-text last-name">Reongsang</h1>
-				<div class="cardCover"></div>
-				<canvas id="threeJsCanvas"></canvas>
-				<h1 class="hero front-text first-name">Phurin</h1>
-				<h1 class="hero front-text last-name">Reongsang</h1>
-				<canvas id="webglCanvas"></canvas>
-				<h2 class="subtitle">Software Engineer</h2>
+				<section class="hero-section">
+					<h1 class="hero back-text first-name" data-speed="1">Phurin</h1>
+					<h1 class="hero back-text last-name" data-speed="0.75">Reongsang</h1>
+					<div class="cardCover"></div>
+					<canvas id="threeJsCanvas" data-speed="2"></canvas>
+					<h1 class="hero front-text first-name" data-speed="1">Phurin</h1>
+					<h1 class="hero front-text last-name" data-speed="0.75">Reongsang</h1>
+					<h2 class="subtitle" data-speed="0.75">Software Engineer</h2>
+				</section>
+				<section class="about-me-section">
+					<span>something about me</span>
+					<p class="about-me-text">
+						I'm <span class="bold">Phurin</span>, a college student with a
+						passion for <span class="bold">web development</span> and design.
+						Experienced in both <span class="bold">front-end</span> and
+						<span class="bold">back-end</span> development, I thrive on bringing
+						creative ideas to life through intuitive interfaces and
+						pixel-perfect designs.
+					</p>
+					<button>READ MORE</button>
+				</section>
 			</div>
+			<canvas id="webglCanvas"></canvas>
 		</div>
 		<script type="module" src="/src/main.js"></script>
 		<script src="/src/metaball.js"></script>

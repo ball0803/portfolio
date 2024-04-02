@@ -1,13 +1,13 @@
 body {
-    background-color : #f8f5f0;
+    background-color: #FEF5E9;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     font-family: "Livvic", sans-serif;
     font-weight: 400;
     font-style: normal;
+    overflow-x: hidden;
 }
 
 canvas{
@@ -45,11 +45,13 @@ h1{
     color: #FFFFFF;
     /* color: #000000; */
     mix-blend-mode: normal;
+    z-index: -2;
 }
 
 .hero{
     position: absolute;
 }
+
 
 #webglCanvas {
     display: block;
@@ -66,30 +68,62 @@ h1{
 
 .cardCover{
     color:white;
-    /* background-color: #F9C920; */
-    background-image: radial-gradient(circle at 50.2% 50.10%, #e69c2e, #F9C920);
-    /* background-image: linear-gradient(90deg, #e69c2e, #F9C920); */
+    background-color: #F9C920;
+    position: fixed;
     border-radius: 2rem;
     padding: 20px;
     width: 600px;
     height: 600px;
-    margin: 10px auto;
+    /* margin: 10px auto; */
 	transform-style: preserve-3d;
+    z-index: -1;
 }
 
-.container {
-    position: absolute;
-    background-color: #FEF5E9;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-section {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    padding-top: 5%;
+    width: 100vw;
+    height: 100vh;
+}
 
+.subtitle{
+    /* font-size: 10rem; */
+    /* letter-spacing: -0.5rem; */
+    transform: translateY(20rem);
+
+}
+
+.about-me-section{
+    padding: 20rem 15rem ;
+}
+
+.about-me-section span{
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+}
+
+.about-me-text{
+    padding: 0 2rem;
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: -0.1rem;
+}
+
+span.bold{
+    font-size: 3rem;
+    font-weight: 700;
 }
